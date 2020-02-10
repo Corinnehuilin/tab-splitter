@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Tab Splitter</title> 
+    <link rel="stylesheet" type="text/css" href="design.css">
+</head>
+
+<body>
+    <div class="Title">
+        <div>Tab Splitter</div>
+    </div>
+
+    <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a class="active" href="index.html">Home</a></li>
+    </ul>
+
+
+<center>
+    <div class="people">
+        <div class="big-text">How many people are in your group?<br></div>
+        <div class="small-text">(min 2, max 20)</div>   
+        <br>
+        <form id="form">
+            <input type="number" min="2" max="20" value="2" id="numberOfPeople">
+            <br>
+            <input type="button" value="next" onclick="createForms()" >
+        </form>
+
+        <br>
+
+        <label class="switch">
+            <input id="divideEvenly" type="checkbox">
+            <span class="slider round"></span>
+        </label>
+
+        <div class="small-text">Divide cost evenly?</div>
+    </div>
+
+    <br><br>
+
+    <form id="tip">
+        Tip percent: <input type="number" id="tipPercent" value="20">
+        <br><br>
+    </form>
+
+    <table id="makeForms"></table>
+
+    <br>
+
+    <input type="button" value="calculate" onclick="calcTotals()" id="calcButton">
+
+</center>
+
+</body>
+
+</html>
+
+
+
+<script language="JavaScript">
+
+    function createForms() {
+        var numberOfPeople = +document.getElementById("numberOfPeople").value;
+        var tableroot = document.getElementById("makeForms");
+        tableroot.innerHTML="";
+            for (var i = 0; i < numberOfPeople; i++) {
+                
+                var makeForms = document.createElement("tr");
+
+                var namefield = document.createElement("td");
+                namefield.innerText = "Name: ";
+                makeForms.appendChild(namefield)
+                var formName = document.createElement("input");
+                formName.setAttribute("type", "text");
+                var nameInput = document.createElement("td");
+                nameInput.appendChild(formName)
+                makeForms.appendChild(nameInput)
+
+                var pricefield = document.createElement("td");
+                pricefield.innerText = "Price: ";
+                makeForms.appendChild(pricefield)
+                var formPrice = document.createElement("input");
+                formPrice.setAttribute("type", "number");
+                var priceInput = document.createElement("td");
+                priceInput.appendChild(formPrice)
+                makeForms.appendChild(priceInput)
+
+                tableroot.appendChild(makeForms);
+            }
+    }
+
+    function calcTotals() {
+        tab = document.getElementById("makeForms");
+
+        var numberOfPeople = document.getElementById("numberOfPeople").value;
+
+        var divideEvenly = document.getElementById("divideEvenly").checked;
+
+        var tipPercent = document.getElementById("tipPercent").value;
+        if(tipPercent < 0) {
+            alert("Tip percent must be at least 0%");
+            return;
+        }
+
+        var total = 0.0;
+        for(var i = 0; i < numberOfPeople; i++) {
+            var price = parseFloat(tab.rows[i].cells[3].firstChild.value);
+            if(price < 0.0) {
+                alert("Price for " + tab.rows[i].cells[1].firstChild.value + " must be greater than 0.00");
+                return;
+            }
+
+            total += price;
+        }
+
+
+        if(divideEvenly) {
+            var tipAmount = parseFloat((0.01 * tipPercent * total).toFixed(2));
+
+            alert("Price: $" + total.toFixed(2) + "\n" + 
+                  "Tip: $" + tipAmount.toFixed(2) + "\n" +
+                  "Total: $" + (tipAmount + total).toFixed(2) + "\n\n" +
+                  "Per person: $" + ((total + tipAmount) / numberOfPeople).toFixed(2));
+
+        } else {
+            var perPersonOutput = "";
+            for(var i = 0; i < numberOfPeople; i++) {
+                var amount = parseFloat(tab.rows[i].cells[3].firstChild.value);
+                var tipAmount = parseFloat((0.01 * tipPercent * amount).toFixed(2));
+                perPersonOutput += "\n" + tab.rows[i].cells[1].firstChild.value + ": $" + (amount + tipAmount).toFixed(2);
+            }
+
+            var tipAmount = parseFloat((0.01 * tipPercent * total).toFixed(2));
+
+            alert("Price: $" + total.toFixed(2) + "\n" + 
+                  "Tip: $" + tipAmount.toFixed(2) + "\n" +
+                  "Total: $" + (tipAmount + total).toFixed(2) + "\n" + 
+                  perPersonOutput);
+        }
+    }
+
+</script>
