@@ -78,12 +78,29 @@
     document.getElementById("tip").style.visibility = "hidden";
     document.getElementById("clearForm").style.visibility = "hidden";
 
-
     // creates the forms based on number above
     function createForms() {
 
-        var numberOfPeople = +document.getElementById("numberOfPeople").value;
+        var numberOfPeople = document.getElementById("numberOfPeople").value;
         var tableroot = document.getElementById("makeForms");
+
+        // var isnum2 = /^\d+$/.test(numberOfPeople);
+        var isnum2 = true;
+        if (isNaN(parseInt(numberOfPeople))) {
+            isnum2 = false;  
+        } else {
+            numberOfPeople = +numberOfPeople
+        }
+
+        if(!isnum2) {
+            alert("Please enter a number.");
+            return;
+        }
+
+        if(numberOfPeople < 2 || numberOfPeople > 30) {
+            alert("Number of people must be between 2 and 30 people.");
+            return;
+        }
 
         tableroot.innerHTML="";
             for (var i = 0; i < numberOfPeople; i++) {
@@ -110,11 +127,8 @@
 
                 tableroot.appendChild(makeForms);
             }
-
-        if(numberOfPeople < 0) {
-            alert("Number of people must be between 2 and 30 people.");
-            return;
-        }
+        
+        
 
         // show buttons
         document.getElementById("calcButton").style.visibility = "visible";
@@ -142,17 +156,30 @@
         for(var i = 0; i < numberOfPeople; i++) {
 
             var price = parseFloat(tab.rows[i].cells[3].firstChild.value);
-            if(price < 0.0) {
-                alert("Price for " + tab.rows[i].cells[1].firstChild.value + " must be at least $0.00.");
+            var name = tab.rows[i].cells[1].firstChild.value
+
+            // variable for numbers
+            var isnum = /^\d+$/.test(price);
+
+            var ischar = name != "";
+            if(!ischar) {
+                alert("Please complete all forms.");
                 return;
             }
 
-            var isnum = /^\d+$/.test(price);
             if(!isnum) {
-                alert("Price for " + tab.rows[i].cells[1].firstChild.value + " must be a number.");
+                alert("Price for " + name + " must be a number.");
                 return;
             }
-             
+
+            if(price < 0.0) {
+                alert("Price for " + name + " must be at least $0.00.");
+                return;
+            }
+            
+
+            
+  
             total += price;
         }  
 
