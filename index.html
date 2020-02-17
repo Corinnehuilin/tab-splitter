@@ -14,21 +14,19 @@
 
 <center>
 
-    <!-- main box with area to add number of people in group -->
+    <!-- main box with area to add number of people in group and choose how to divide tab -->
     <div class="people">
         <div class="big-text">How many people are in your group?<br></div>
         <div class="small-text">(min 2, max 30)</div>   
 
-        <br>
-
         <!-- input box to add number of people -->
         <form id="form">
             <input type="number" min="2" max="30" value="2" id="numberOfPeople">
-            <br>
-            <input type="button" value="next" onclick="createForms()" >
         </form>
 
-        <br>
+        <div class="break-text">
+            <br>
+        </div>
 
         <!-- choose method of splitting tab -->
         <label class="switch">
@@ -37,6 +35,15 @@
         </label>
 
         <div class="small-text">Divide cost evenly?</div>
+
+        <div class="break-text">
+            <br>
+        </div>
+
+        <!-- "next" button -->
+        <form id="form">
+            <input type="button" value="next" onclick="createForms()" >
+        </form>
 
     </div>
 
@@ -52,12 +59,12 @@
 
     <br>
 
-    <!-- calculate button -->
+    <!-- "calculate" button -->
     <input type="button" value="calculate" onclick="calcTotals()" id="calcButton">
 
     <br><br><br>
     
-    <!-- restart button -->
+    <!-- "restart" button -->
     <input type="button" value="restart" onclick="clearForm()" id="clearForm">
 
     <!-- floating help icon -->
@@ -73,19 +80,22 @@
 
 <script language="JavaScript">
 
-    // hide buttons
+    // hide buttons at start
     document.getElementById("calcButton").style.visibility = "hidden";
     document.getElementById("tip").style.visibility = "hidden";
     document.getElementById("clearForm").style.visibility = "hidden";
 
-    // creates the forms based on number above
+
+    // this function creates the forms based on the number chosen above
     function createForms() {
+
 
         var numberOfPeople = document.getElementById("numberOfPeople").value;
         var tableroot = document.getElementById("makeForms");
-
-        // var isnum2 = /^\d+$/.test(numberOfPeople);
         var isnum2 = true;
+
+
+        // alerts for possible errors in the "number of people" input box
         if (isNaN(parseInt(numberOfPeople))) {
             isnum2 = false;  
         } else {
@@ -102,11 +112,19 @@
             return;
         }
 
-        tableroot.innerHTML="";
+        if(numberOfPeople != parseInt(numberOfPeople)) {
+            alert("Number of people must be an integer. (No fraction of a person allowed.)");
+            return;
+        }
+
+
+        // this makes the forms (based on number entered above)
+        tableroot.innerHTML = "";
             for (var i = 0; i < numberOfPeople; i++) {
                 
                 var makeForms = document.createElement("tr");
 
+                // name
                 var namefield = document.createElement("td");
                 namefield.innerText = "Name: ";
                 makeForms.appendChild(namefield)
@@ -116,6 +134,7 @@
                 nameInput.appendChild(formName)
                 makeForms.appendChild(nameInput)
 
+                // price
                 var pricefield = document.createElement("td");
                 pricefield.innerText = "Price: ";
                 makeForms.appendChild(pricefield)
@@ -127,10 +146,9 @@
 
                 tableroot.appendChild(makeForms);
             }
-        
-        
 
-        // show buttons
+
+        // show buttons once "next" is clicked
         document.getElementById("calcButton").style.visibility = "visible";
         document.getElementById("tip").style.visibility = "visible";
         document.getElementById("clearForm").style.visibility = "visible";
@@ -140,27 +158,30 @@
 
     // calculates totals based on selected method above
     function calcTotals() {
+
         tab = document.getElementById("makeForms");
 
         var numberOfPeople = document.getElementById("numberOfPeople").value;
-
         var divideEvenly = document.getElementById("divideEvenly").checked;
-
         var tipPercent = document.getElementById("tipPercent").value;
+
+        // alerts for possible errors in the "tip percent" input box
         if(tipPercent < 0) {
             alert("Tip percent must be greater than or equal to 0%.");
             return;
         }
 
         var total = 0.0;
+
         for(var i = 0; i < numberOfPeople; i++) {
+
 
             var price = parseFloat(tab.rows[i].cells[3].firstChild.value);
             var name = tab.rows[i].cells[1].firstChild.value
-
-            // variable for numbers
             var isnum = /^\d+$/.test(price);
 
+
+            // alerts for possible errors in the "name" or "price" input boxes
             var ischar = name != "";
             if(!ischar) {
                 alert("Please complete all forms.");
@@ -176,12 +197,10 @@
                 alert("Price for " + name + " must be at least $0.00.");
                 return;
             }
-            
-
-            
   
             total += price;
         }  
+
 
         // for a bill that is divided evenly
         if(divideEvenly) {
@@ -193,12 +212,15 @@
                   "Total: $" + (tipAmount + total).toFixed(2) + "\n\n" +
                   "Per person: $" + ((total + tipAmount) / numberOfPeople).toFixed(2));
 
+
         // for a bill that is not divided evenly
         } else {
             var perPersonOutput = "";
+
             for(var i = 0; i < numberOfPeople; i++) {
                 var amount = parseFloat(tab.rows[i].cells[3].firstChild.value);
                 var tipAmount = parseFloat((0.01 * tipPercent * amount).toFixed(2));
+                
                 perPersonOutput += "\n" + tab.rows[i].cells[1].firstChild.value + ": $" + (amount + tipAmount).toFixed(2);
             }
 
@@ -212,7 +234,8 @@
         }
     }
 
-    // this is the clear form button stuff
+
+    // this is the "clear" button to restart the program
     function clearForm() {
         location.reload();
         return false;

@@ -6,16 +6,17 @@ body {
   text-align: center;
 }
 
-/* "Tab Splitter" */
+/* "Tab Splitter" title */
 .Title {
   color: rgb(85, 150, 223);
   text-align: center;
   font-size: 50px;
   font-weight: bold;
   padding: 0.25%;
+  margin-top: 0.5%;
 }
 
-/* Box to input # of people */
+/* Box to input number of people */
 .people {
   text-align: center;
   font-size: 16px;
@@ -23,122 +24,137 @@ body {
   border-radius: 40px;
   margin-right: 25%;
   margin-left: 25%;
-  margin-top: 3%;
+  margin-top: 2%;
   padding: 1.5%
 }
 
-.small-text {
-  font-size: small;
-  color: rgbrgb(158, 161, 168);
-}
+/* various text customizations */
+  .small-text {
+    font-size: small;
+    color: rgb(158, 161, 168);
+  }
 
-.big-text {
-  color: rgb(158, 161, 168);
-}
+  .break-text {
+    font-size: 10px;
+  }
 
-input[type=button], input[type=submit], input[type=reset] {
-  background-color: rgb(75, 81, 97);
-  border: 1px solid rgb(255, 255, 255);
-  color: rgb(255, 255, 255);
-  width: 10%;
-  padding-left: 7px;
-  padding-right: 7px;
-  margin-left: 7px;
-  margin-right: 7px;
-  text-decoration: none;
-  cursor: pointer;
-}
+  .big-text {
+    color: rgb(158, 161, 168);
+  }
 
-#numberOfPeople {
-  border: 1px solid rgb(255, 255, 255);
-  width: 37px;
-  border-radius: 30px;
-  padding-left: 7px;
-  padding-right: 7px;
-  margin-left: 7px;
-  margin-right: 7px;
-}
 
-#tipPercent {
-  border: 1px solid rgb(255, 255, 255);
-  width: 37px;
-  border-radius: 30px;
-  padding-left: 7px;
-  padding-right: 7px;
-  margin-left: 7px;
-  margin-right: 7px;
-}
+/* BUTTONS AND INPUT BOXES */
 
-#calcButton {
-  border: 1px solid rgb(255, 255, 255);
-  background-color: rgb(65, 115, 173);
-  width: 82px;
-  border-radius: 30px;
-  padding-left: 7px;
-  padding-right: 7px;
-  margin-left: 7px;
-  margin-right: 7px;
-}
+  /* standard input boxes*/
+  input[type=button], input[type=submit], input[type=reset] {
+    background-color: rgb(75, 81, 97);
+    border: 1px solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    width: 10%;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 7px;
+    margin-right: 7px;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
-#clearForm {
-  border: 1px solid rgb(255, 255, 255);
-  width: 82px;
-  border-radius: 30px;
-  padding-left: 7px;
-  padding-right: 7px;
-  margin-left: 7px;
-  margin-right: 7px;
-}
-
-input[type = text] {
-  border: 1px solid rgb(255, 255, 255);
-  width: 150px;
-  border-radius: 30px;
-  padding-left: 7px;
-  padding-right: 7px;
-  margin-left: 7px;
-  margin-right: 7px;
-}
-
-input[type = number] {
-  border: 1px solid rgb(255, 255, 255);
-  width: 100px;
-  border-radius: 30px;
-  padding-left: 7px;
-  padding-right: 7px;
-  margin-left: 7px;
-  margin-right: 7px;
-}
-
-/* input boxes */
-input {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 12pt;
-  color: rgb(255, 255, 255);
-  background-color: rgb(75, 81, 96);
-  border-radius: 30px;
-  padding-left: 7px;
-  padding-right: 7px;
-  margin-left: 7px;
-  margin-right: 7px;
-}
-
-/* The switch - the box around the slider */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 26px;
+  input[type = text] {
+    border: 1px solid rgb(255, 255, 255);
+    width: 150px;
+    border-radius: 30px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 7px;
+    margin-right: 7px;
   }
   
-  /* Hide default HTML checkbox */
+  input[type = number] {
+    border: 1px solid rgb(255, 255, 255);
+    width: 100px;
+    border-radius: 30px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+
+  input {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12pt;
+    color: rgb(255, 255, 255);
+    background-color: rgb(75, 81, 96);
+    border-radius: 30px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+
+  /* number of people box */
+  #numberOfPeople {
+    border: 1px solid rgb(255, 255, 255);
+    width: 37px;
+    border-radius: 30px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+
+  /* tip percent box */
+  #tipPercent {
+    border: 1px solid rgb(255, 255, 255);
+    width: 37px;
+    border-radius: 30px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+
+  /* "calculate" button */
+  #calcButton {
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(65, 115, 173);
+    width: 82px;
+    border-radius: 30px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+
+  /* "restart" button */
+  #clearForm {
+    border: 1px solid rgb(255, 255, 255);
+    width: 82px;
+    border-radius: 30px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+
+
+/* "DIVIDE EVENLY" SLIDER */
+
+  /* the box around the slider */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 19.5px;
+  }
+    
+  /* hide default HTML checkbox */
   .switch input {
     opacity: 0;
     width: 0;
     height: 0;
   }
-  
-  /* The slider */
+
+  /* the slider */
   .slider {
     position: absolute;
     cursor: pointer;
@@ -150,42 +166,44 @@ input {
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   .slider:before {
     position: absolute;
     content: "";
-    height: 18px;
-    width: 18px;
-    left: 4px;
-    bottom: 4px;
+    height: 13.5px;
+    width: 13.5px;
+    left: 3px;
+    bottom: 3px;
     background-color: rgb(55, 65, 64);
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   input:checked + .slider {
     background-color: rgb(85, 150, 223);
   }
-  
+
   input:focus + .slider {
     box-shadow: 0 0 1px rgb(85, 150, 223);
   }
 
   input:checked + .slider:before {
-    -webkit-transform: translateX(34x);
-    -ms-transform: translateX(34px);
-    transform: translateX(34px);
+    -webkit-transform: translateX(25.5px);
+    -ms-transform: translateX(25.5px);
+    transform: translateX(25.5px);
   }
-  
-  /* Rounded sliders */
+
+  /* rounded sliders */
   .slider.round {
     border-radius: 30px;
   }
-  
+
   .slider.round:before {
     border-radius: 50%;
   }
 
+
+/* FLOATING HELP ICON */
 .help {
   font-family: century 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   width: 25px;
