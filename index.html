@@ -174,22 +174,14 @@
         var total = 0.0;
 
         for(var i = 0; i < numberOfPeople; i++) {
-
-
+            var name = tab.rows[i].cells[1].firstChild.value;
             var price = parseFloat(tab.rows[i].cells[3].firstChild.value);
-            var name = tab.rows[i].cells[1].firstChild.value
-            var isnum = /^\d+$/.test(price);
-
+            var isnum = /^[\d\.]+$/.test(price);
+            var ischar = name != "";
 
             // alerts for possible errors in the "name" or "price" input boxes
-            var ischar = name != "";
             if(!ischar) {
                 alert("Please complete all forms.");
-                return;
-            }
-
-            if(!isnum) {
-                alert("Price for " + name + " must be a number.");
                 return;
             }
 
@@ -198,6 +190,11 @@
                 return;
             }
   
+            if(!isnum) {
+                alert("Price for " + name + " must be a number.");
+                return;
+            }
+
             total += price;
         }  
 
@@ -208,13 +205,13 @@
             
             // the result is given here
             alert("Price: $" + total.toFixed(2) + "\n" + 
-                  "Tip: $" + tipAmount.toFixed(2) + "\n" +
-                  "Total: $" + (tipAmount + total).toFixed(2) + "\n\n" +
-                  "Per person: $" + ((total + tipAmount) / numberOfPeople).toFixed(2));
-
+                "Tip: $" + tipAmount.toFixed(2) + "\n" +
+                "Total: $" + (tipAmount + total).toFixed(2) + "\n\n" +
+                "Per person: $" + ((total + tipAmount) / numberOfPeople).toFixed(2));
+        }
 
         // for a bill that is not divided evenly
-        } else {
+        else {
             var perPersonOutput = "";
 
             for(var i = 0; i < numberOfPeople; i++) {
@@ -228,10 +225,11 @@
 
             // the result is given here
             alert("Price: $" + total.toFixed(2) + "\n" + 
-                  "Tip: $" + tipAmount.toFixed(2) + "\n" +
-                  "Total: $" + (tipAmount + total).toFixed(2) + "\n" + 
-                  perPersonOutput);
+                "Tip: $" + tipAmount.toFixed(2) + "\n" +
+                "Total: $" + (tipAmount + total).toFixed(2) + "\n" + 
+                perPersonOutput);
         }
+
     }
 
 
